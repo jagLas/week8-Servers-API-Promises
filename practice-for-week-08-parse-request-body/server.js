@@ -8,7 +8,8 @@ let server;
 // Your code here
 const http = require('http');
 
-server = http.createServer((res, req) => {
+server = http.createServer((req, res) => {
+    console.log(req.method, req.url)
 
 });
 
