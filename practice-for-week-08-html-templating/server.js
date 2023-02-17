@@ -117,6 +117,14 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId == dogId);
         // Your code here
+        const htmlString = fs.readFileSync('./views/dog-details.html', 'utf-8');
+        const htmlPage = htmlString
+          .replace(/#{name}/g, dog.name)
+          .replace(/#{age}/g, dog.age);
+        
+        res.setHeader('content-type', 'text/html');
+        res.statusCode = 200;
+        return res.end(htmlPage);
       }
     }
 
