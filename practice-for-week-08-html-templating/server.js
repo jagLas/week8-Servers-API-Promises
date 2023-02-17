@@ -151,6 +151,15 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId == dogId);
         // Your code here
+        const htmlString = fs.readFileSync('./views/edit-dog.html','utf-8');
+        const htmlPage = htmlString
+        .replace(/#{dogId}/g, dog.dogId)
+        .replace(/#{name}/g, dog.name)
+        .replace(/#{age}/g, dog.age);
+
+        res.statusCode = 200;
+        res.setHeader('content-type', 'text/html');
+        return res.end(htmlPage);
       }
     }
 
