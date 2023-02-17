@@ -21,14 +21,29 @@ function thirdStep(input) {
 
 function fourthStep(input) {
   // Your code here
+  return input.map(pair => {
+    return [pair[0], decodeURIComponent(pair[1])];
+  })
 }
 
 function fifthStep(input) {
   // Your code here
+  const object = {};
+  input.forEach(pair => {
+    object[pair[0]] = pair[1];
+  })
+
+  return object;
 }
 
 function parseBody(str) {
   // Your code here
+  str = firstStep(str);
+  str = secondStep(str);
+  str = thirdStep(str);
+  str = fourthStep(str);
+  str = fifthStep(str);
+  return str;
 }
 
 const test = "username=azure+green&password=password%21"
