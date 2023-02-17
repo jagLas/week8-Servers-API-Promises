@@ -46,9 +46,6 @@ function parseBody(str) {
   return str;
 }
 
-const test = "username=azure+green&password=password%21"
-console.log(thirdStep(secondStep(firstStep(test))))
-
 /******************************************************************************/
 /******************* DO NOT CHANGE THE CODE BELOW THIS LINE *******************/
 

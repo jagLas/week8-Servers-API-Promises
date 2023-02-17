@@ -11,6 +11,21 @@ const http = require('http');
 server = http.createServer((req, res) => {
     console.log(req.method, req.url)
 
+
+    let reqBodyStr = ''
+    req.on('data', data => {
+        reqBodyStr += data;
+    })
+
+    req.on('end', () => {
+        console.log(reqBodyStr)
+        if (reqBodyStr.length > 0) {
+            req.body = parseBody(reqBodyStr);
+        }
+        
+        sendFormPage(req, res);
+    });
+
 });
 
 server.listen(5000, () => console.log('Successfully started the server on port 5000'))
