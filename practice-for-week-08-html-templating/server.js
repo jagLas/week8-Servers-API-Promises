@@ -89,6 +89,16 @@ const server = http.createServer((req, res) => {
     // Phase 1: GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
       // Your code here
+      const htmlText = fs.readFileSync('./views/dogs.html', 'utf-8');
+      let dogList = '<ul>';
+      dogs.forEach(dog => {
+        dogList += `<li>${dog.name}</li>`
+      })
+      const htmlPage = htmlText.replace(/#{dogsList}/g, dogList);
+
+      res.statusCode = 200;
+      res.setHeader('content-type', 'text/html');
+      return res.end(htmlPage);
     }
 
     // Phase 2: GET /dogs/new
