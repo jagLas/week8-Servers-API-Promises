@@ -170,6 +170,12 @@ const server = http.createServer((req, res) => {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId == dogId);
         // Your code here
+        dog.name = req.body.name;
+        dog.age = req.body.age;
+
+        res.statusCode = 302;
+        res.setHeader('location', `/dogs/${dog.dogId}`);
+        return res.end();
       }
     }
 
