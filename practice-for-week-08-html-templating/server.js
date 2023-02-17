@@ -116,6 +116,9 @@ const server = http.createServer((req, res) => {
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         const dog = dogs.find(dog => dog.dogId == dogId);
+        if (!dog) {
+          return dog404(res);
+        }
         // Your code here
         const htmlString = fs.readFileSync('./views/dog-details.html', 'utf-8');
         const htmlPage = htmlString
@@ -190,6 +193,16 @@ const server = http.createServer((req, res) => {
     return res.end();
   });
 });
+
+const dog404 = (res) => {
+  res.statusCode = 200;
+  res.setHeader('content-type', 'text/html');
+
+  const htmlString = fs.readFileSync('./views/error.html', 'utf-8');
+  const htmlPage = htmlString.replace(/#{message}/g, 'Dog Not Found');
+
+  return res.end(htmlPage);
+}
 
 const port = 5000;
 
