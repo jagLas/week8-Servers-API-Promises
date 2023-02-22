@@ -44,6 +44,9 @@ const server = http.createServer((req, res) => {
     }
 
     // Phase 2: POST /player
+    if (req.method === 'POST' && req.url === '/player') {
+      
+    }
 
     // Phase 3: GET /rooms/:roomId
 
