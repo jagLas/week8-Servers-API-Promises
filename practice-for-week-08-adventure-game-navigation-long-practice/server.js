@@ -153,6 +153,9 @@ const server = http.createServer((req, res) => {
       return res.end();
     }
     // Phase 6: Redirect if no matching route handlers
+    res.statusCode = 302;
+    res.setHeader('location', `/rooms/${player.currentRoom.id}`);
+    return res.end();
   })
 });
 
