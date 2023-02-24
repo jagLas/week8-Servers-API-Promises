@@ -118,7 +118,40 @@ const server = http.createServer((req, res) => {
     }
 
     // Phase 5: POST /items/:itemId/:action
+    if (req.method === 'POST' && req.url.startsWith('/items')) {
+      let itemId = req.url.split('/')[2];
+      let action = req.url.split('/')[3];
+      console.log(itemId, action)
+      try {
+        switch (action) {
+          case 'take':
+            console.log(`player took an item`)
+            player.takeItem(itemId);
+            break;
+          case 'drop':
+            console.log(`player dropped an item`)
+            player.dropItem(itemId);
+            break;
+          case 'eat':
+            console.log(`player ate an item`)
+            player.eatItem(itemId);
+            break;
+        }
+      } catch (error) {
+        console.log(`action failed: redirecting`, error.message)
+        const htmlString = fs.readFileSync('./views/error.html', 'utf-8');
+        const htmlPage = htmlString
+          .replace(/#{errorMessage}/g, error.message)
+          .replace(/#{roomId}/, player.currentRoom.id);
+          res.statusCode = 404;
+          res.setHeader('content-type', 'text/html');
+          return res.end(htmlPage);
+      }
 
+      res.statusCode = 302;
+      res.setHeader('location', `/rooms/${player.currentRoom.id}`)
+      return res.end();
+    }
     // Phase 6: Redirect if no matching route handlers
   })
 });
