@@ -34,6 +34,7 @@ const server = http.createServer((req, res) => {
     }
 
     /* ======================== ROUTE HANDLERS ========================== */
+    console.log(req.method, req.url)
     // Phase 1: GET /
     if (req.method === 'GET' && req.url === '/') {
       res.setHeader('Content-Type', 'text/html');
@@ -53,7 +54,7 @@ const server = http.createServer((req, res) => {
       player = new Player (req.body.name, startingRoom);
 
       res.setHeader('location', `/rooms/${startingRoom.id}`);
-      console.log(`adding ${player}`);
+      console.log(`adding ${player.name} in ${player.currentRoom.id}`);
       return res.end();
     }
 
@@ -89,7 +90,32 @@ const server = http.createServer((req, res) => {
         return res.end(htmlPage);
       }
     }
+
     // Phase 4: GET /rooms/:roomId/:direction
+    if (req.method === 'GET' && req.url.startsWith('/rooms')) {
+      //checks if requested room is same as players current room
+      const roomId = req.url.split('/')[2];
+      if (roomId != player.currentRoom.id) {
+        //redirects to the correct room if not
+        res.statusCode = 302;
+        res.setHeader('location', `/rooms/${player.currentRoom.id}`)
+        return res.end();
+      }
+
+      if (req.url.split('/').length === 4) {
+        let direction = req.url.split('/')[3][0].toLocaleLowerCase();
+        try {
+          player.move(direction)
+          console.log(`moved to ${player.currentRoom.id}`);
+        } catch {
+          console.log(`Error: redirecting to room ${player.currentRoom.id}`)
+        }
+        
+        res.statusCode = 302;
+        res.setHeader('location', `/rooms/${player.currentRoom.id}`)
+        return res.end();
+      }
+    }
 
     // Phase 5: POST /items/:itemId/:action
 
