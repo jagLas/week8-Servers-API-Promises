@@ -33,7 +33,18 @@ async function waiting() {
 /* --------------------- creating a custom Promise --------------------- */
 
 // Your code here
+async function waitForMyPromise() {
+    const promise = new Promise(resolve => {
+        setTimeout(() => {
+            resolve('done!!!')
+        }, 1000)
+    })
 
+    const result = await promise;
+    console.log('my promise is', result);
+}
+
+waitForMyPromise();
 
 
 /* ============================== Phase 4 ============================== */
