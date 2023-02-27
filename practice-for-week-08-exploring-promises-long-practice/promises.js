@@ -51,6 +51,11 @@ waitForMyPromise();
 /* -------------------------- exploring then --------------------------- */
 
 // Your code here
+new Promise(resolve => {
+    setTimeout(() => {
+        resolve('done!');
+    }, 1500)
+}).then(r => console.log('then my other promise is', r))
 
 
 
