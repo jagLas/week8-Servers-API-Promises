@@ -10,16 +10,22 @@ async function num2() {
     return 99;
 }
 
-console.log('num1', num1())
-console.log('num2', num2())
+// console.log('num1', num1())
+// console.log('num2', num2())
 
-num2().then(result => console.log(result))
+// num2().then(result => console.log(result))
 
 
 /* ============================== Phase 2 ============================== */
 /* -------------------------- exploring await -------------------------- */
 
 // Your code here
+async function waiting() {
+    const value = await num2();
+    console.log('waiting', value)
+}
+
+// waiting();
 
 
 
