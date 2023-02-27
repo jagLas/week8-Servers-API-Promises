@@ -128,3 +128,4 @@ for (let i = 1; i < 10; i++) {
 /* -------------------- Promises are asynchronous! --------------------- */
 
 // Your code here
+console.log('END OF PROGRAM')
