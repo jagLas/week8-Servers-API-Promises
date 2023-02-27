@@ -10,10 +10,10 @@ async function num2() {
     return 99;
 }
 
-// console.log('num1', num1())
-// console.log('num2', num2())
+console.log('num1', num1())
+console.log('num2', num2())
 
-// num2().then(result => console.log(result))
+num2().then(result => console.log(result))
 
 
 /* ============================== Phase 2 ============================== */
@@ -25,7 +25,7 @@ async function waiting() {
     console.log('waiting', value)
 }
 
-// waiting();
+waiting();
 
 
 
@@ -51,6 +51,7 @@ waitForMyPromise();
 /* -------------------------- exploring then --------------------------- */
 
 // Your code here
+
 new Promise(resolve => {
     setTimeout(() => {
         resolve('done!');
@@ -63,14 +64,43 @@ new Promise(resolve => {
 /* ------------------- turn setTimeout into a Promise ------------------ */
 
 // Your code here
+function wait(ms) {
+    return new Promise (resolve => setTimeout(resolve, ms));
+}
 
+function testFunc() {
+    wait(2000)
+        .then(() => console.log('did it work?'))
+}
+
+async function testFunc2() {
+    await wait(2000);
+    console.log('did it work?')
+}
+
+testFunc();
+testFunc2();
 
 
 /* ============================== Phase 6 ============================== */
 /* -------------------- exploring reject and .catch -------------------- */
 
 // Your code here
+const tryRandomPromise = random => new Promise ((resolve, reject) => {
+    if (random > .5) {
+        resolve('success!!!');
+    } else {
+        reject('random error');
+    }
+});
 
+for (let i = 1; i < 10 ; i++) {
+    const random = Math.random();
+    wait(2000 + random * 1000)
+        .then(() => tryRandomPromise(random))
+        .then(result => console.log('random try #', i, result))
+        .catch(error => console.error('random try #', i, error))
+}
 
 
 /* ============================== Phase 7 ============================== */
