@@ -107,8 +107,22 @@ for (let i = 1; i < 10 ; i++) {
 /* ---------------- exploring async/await and try/catch ---------------- */
 
 // Your code here
+const tryTryAgain = async (i) => {
+    const random = Math.random();
 
+    await wait(3000 + random * 1000);
 
+    try {
+        const result = await tryRandomPromise(random);
+        console.log('random again #', i, result);
+    } catch (error) {
+        console.error('random again #', i, error);
+    }
+};
+
+for (let i = 1; i < 10; i++) {
+    tryTryAgain(i);
+}
 
 /* ============================== Phase 8 ============================== */
 /* -------------------- Promises are asynchronous! --------------------- */
