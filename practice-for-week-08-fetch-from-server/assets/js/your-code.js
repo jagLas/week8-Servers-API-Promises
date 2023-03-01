@@ -1,5 +1,6 @@
 export function getAllDogs() {
     // Your code here
+    return fetch('/dogs')
 }
 
 export function getDogNumberTwo() {
