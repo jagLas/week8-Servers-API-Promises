@@ -30,5 +30,12 @@ export function postNewDogV2(name, age) {
 
 export function deleteDog(id) {
       // Your code here
+      const headers = {
+        'AUTH': 'ckyut5wau0000jyv5bsrud90y'
+      }
+      return fetch('/dogs/1/delete', {
+        'headers': headers,
+        'method': 'POST'
+        })
       
 }
