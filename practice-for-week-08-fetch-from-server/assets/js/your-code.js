@@ -20,8 +20,15 @@ export function postNewDog() {
 
 export function postNewDogV2(name, age) {
      // Your code here
+     const textBody = new URLSearchParams([['name', name], ['age', age]])
+     return fetch('/dogs', {
+         'headers': {'Content-type': 'application/x-www-form-urlencoded'},
+         'method': 'POST',
+         'body': textBody
+     })
 }
 
 export function deleteDog(id) {
       // Your code here
+      
 }
