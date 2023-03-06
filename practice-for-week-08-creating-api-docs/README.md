@@ -44,16 +44,39 @@ For example, to edit a specific post, the API endpoint could be
 `PATCH /posts/:postId`
 
 - Get all the posts
+GET /posts
+
 - Create a new post
+POST /posts
+
 - Edit a post
+PATCH OR PUT /posts/:post-id
+
 - Create a new user
+POST /users
+
 - Get the comments for a post
+GET /posts/:post-id/comments
+
 - Create a comment for a post
+POST /posts/comments
+
 - Edit a comment for a post
+PUT OR PATCH /posts/:post-id/comments/:comment-id
+
 - Delete a comment for a post
+DELETE /posts/:post-id/comments/:comment-id
+
 - Add a like for a post
+POST /posts/:post-id/likes
+
 - Remove a like for a post
+DELETE /posts:/:post-id/likes/:like-id
+
 - Get all the posts of a user
+GET /users/:user-id/posts
+
 - Submit a search on posts
+POST /posts/search
 
 [starter]: https://github.com/appacademy/practice-for-week-08-creating-api-docs
