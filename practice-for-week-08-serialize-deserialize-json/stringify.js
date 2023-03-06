@@ -1,0 +1,1 @@
+console.log(JSON.stringify({key: 'test', key2: 'test 2'}))
