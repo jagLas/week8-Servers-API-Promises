@@ -84,14 +84,36 @@ const server = http.createServer((req, res) => {
     if (req.method === 'POST' && req.url === '/dogs') {
       const { name, age } = req.body;
       // Your code here
+      if (name && age) {
+        const newId = getNewDogId();
+        dogs.push({dogId: newId, name: name, age: age});
+        res.statusCode = 302;
+        res.setHeader('location', `dogs/${newId}`);
+        return res.end();
+      }
     }
 
     // PUT or PATCH /dogs/:dogId
     if ((req.method === 'PUT' || req.method === 'PATCH')  && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/');
       if (urlParts.length === 3) {
-        const dogId = urlParts[2];
+        const dogIdSearch = urlParts[2];
         // Your code here
+        const { name, age } = req.body;
+        const dog = dogs.find(({dogId}) => dogId == dogIdSearch);
+        if (dog && name) {
+          dog.name = name;
+        }
+
+        if (dog && age) {
+          dog.age = age;
+        }
+
+        if (dog) {
+          res.statusCode = 302;
+          res.setHeader('location', `/dogs/${dog.dogId}`)
+          return res.end();
+        }
       }
     }
 
@@ -99,8 +121,16 @@ const server = http.createServer((req, res) => {
     if (req.method === 'DELETE' && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/');
       if (urlParts.length === 3) {
-        const dogId = urlParts[2];
+        const dogIdSearch = urlParts[2];
         // Your code here
+        const i = dogs.findIndex(({dogId}) => dogId == dogIdSearch);
+        if (i >= 0) {
+          dogs.splice(i, 1);
+          res.statusCode = 200;
+          res.setHeader('content-type', "application/JSON");
+          return res.end("Successfully deleted")
+        }
+
       }
     }
 
