@@ -27,7 +27,7 @@ fetch('/products', {
     }
 })
 .then(res => {
-    console.log(res.redirected)
+  console.log(res.redirected)
   console.log(res.status);
   console.log(res.url);
   const contentHeader = res.headers.get('content-type')
@@ -38,3 +38,22 @@ fetch('/products', {
 /* ============================== Phase 3 ============================== */
 
 // Your code here
+fetch('/products', {
+    method: 'Post',
+    body: new URLSearchParams ({
+        name: 'Carribbean Delight Coffee',
+        description: 'Made by Manatee Coffee',
+        price: 11.99,
+        categories: 'grocery'
+    }).toString(),
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+})
+.then(res => {
+  console.log(res.redirected)
+  console.log(res.status);
+  console.log(res.url);
+  const contentHeader = res.headers.get('content-type')
+  console.log(contentHeader);
+})
