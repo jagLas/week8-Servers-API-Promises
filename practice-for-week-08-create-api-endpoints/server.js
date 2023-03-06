@@ -54,14 +54,29 @@ const server = http.createServer((req, res) => {
     // GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
       // Your code here
+      res.statusCode = 200;
+      res.setHeader('content-type', 'application/json')
+      return res.end(JSON.stringify(dogs));
     }
 
     // GET /dogs/:dogId
     if (req.method === 'GET' && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/'); // ['', 'dogs', '1']
       if (urlParts.length === 3) {
-        const dogId = urlParts[2];
+        const dogIdSearch = urlParts[2];
+
         // Your code here
+        const dog = dogs.find(({dogId}) => dogId == dogIdSearch);
+
+        if (dog) {
+          res.statusCode = 200;
+          res.setHeader('content-type', 'application/json');
+          return res.end(JSON.stringify(dog));
+        } else {
+          res.statusCode = 404;
+          res.setHeader ('content-type', 'text/plain');
+          return res.end('not found');
+        }
       }
     }
 
