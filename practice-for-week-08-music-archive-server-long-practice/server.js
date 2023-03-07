@@ -102,6 +102,18 @@ const server = http.createServer((req, res) => {
       }
     }
 
+    if (req.method === 'POST' && req.url ==='/artists') {
+      if(req.body.name) {
+        res.statusCode = 201;
+        const artistId = getNewArtistId();
+        artists[artistId] = {
+          artistId: artistId,
+          name: req.body.name
+        };
+        return res.end(JSON.stringify(artists[artistId]))
+      }
+    }
+
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.write(`{"Endpoint not found"}`);
