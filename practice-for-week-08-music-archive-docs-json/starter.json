@@ -60,7 +60,7 @@
       "body":
       {
         "name": "artist name",
-        "artistId": newId
+        "artistId": "newId"
       }
     }
   },
