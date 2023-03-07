@@ -90,16 +90,7 @@ const server = http.createServer((req, res) => {
         const artistDetails  = {};
         artistDetails.artistId = artist.artistId;
         artistDetails.name = artist.name;
-  
-        artistDetails.albums = [];
-        for (const album in albums) {
-          if (albums[album].artistId == artistId) {
-            artistDetails.albums.push(albums[album]);
-          }
-        }
-  
-        artistDetails.name = artist.name;
-        artistDetails.artistId = artist.artistId;
+        artistDetails.albums = getAlbumsByArtist(artistId);
   
         return res.end(JSON.stringify(artistDetails))
       }
@@ -143,16 +134,11 @@ const server = http.createServer((req, res) => {
     //Get all albums of a specific artist based on artistId
     if (req.method === 'GET' && splitUrl[1] === 'artists' && splitUrl[3] === 'albums' && splitUrl.length === 4) {
       const artistId = splitUrl[2];
-      const bandAlbums = [];
-      for (const album in albums) {
-        if (albums[album].artistId == artistId) {
-          bandAlbums.push(albums[album]);
-        }
-      }
-
+      const bandAlbums = getAlbumsByArtist(artistId);
       return res.end(JSON.stringify(bandAlbums))
     }
 
+    //endpoint not found
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.write(`{"Endpoint not found"}`);
@@ -160,7 +146,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-getAlbumsByArtist(artistId) {
+function getAlbumsByArtist(artistId) {
   const bandAlbums = [];
   for (const album in albums) {
     if (albums[album].artistId == artistId) {
