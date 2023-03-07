@@ -68,10 +68,43 @@ const server = http.createServer((req, res) => {
     /* ========================== ROUTE HANDLERS ========================== */
 
     // Your code here
+    res.statusCode = 200;
+    res.setHeader('content-type', 'application/json')
+    const splitUrl = req.url.split('/');
+
+    if (req.method === 'GET' && req.url === '/artists') {
+      return res.end(JSON.stringify(artists));
+    }
+
+    if (req.method === 'GET' && req.url ==='/albums') {
+      return res.end(JSON.stringify(albums));
+    }
+
+    if (req.method === 'GET' && splitUrl.length === 3) {
+      let artistId = splitUrl[2];
+      let artist = artists[artistId];
+      if (artist) {
+        const artistDetails  = {};
+        artistDetails.artistId = artist.artistId;
+        artistDetails.name = artist.name;
+  
+        artistDetails.albums = [];
+        for (const album in albums) {
+          if (albums[album].artistId == artistId) {
+            artistDetails.albums.push(albums[album]);
+          }
+        }
+  
+        artistDetails.name = artist.name;
+        artistDetails.artistId = artist.artistId;
+  
+        return res.end(JSON.stringify(artistDetails))
+      }
+    }
 
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
-    res.write("Endpoint not found");
+    res.write(`{"Endpoint not found"}`);
     return res.end();
   });
 });
