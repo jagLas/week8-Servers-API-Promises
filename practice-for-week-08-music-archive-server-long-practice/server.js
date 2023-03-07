@@ -180,6 +180,8 @@ const server = http.createServer((req, res) => {
       }
     }
 
+    //delete a specified album by albumId
+
     //endpoint not found
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
