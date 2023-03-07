@@ -73,11 +73,11 @@ const server = http.createServer((req, res) => {
     const splitUrl = req.url.split('/');
 
     if (req.method === 'GET' && req.url === '/artists') {
-      return res.end(JSON.stringify(artists));
+      return res.end(JSON.stringify(Object.values(artists)));
     }
 
     if (req.method === 'GET' && req.url ==='/albums') {
-      return res.end(JSON.stringify(albums));
+      return res.end(JSON.stringify(Object.values(albums)));
     }
 
     if (req.method === 'GET' && splitUrl.length === 3 && req.url.startsWith('/artists')) {
@@ -114,8 +114,16 @@ const server = http.createServer((req, res) => {
       }
     }
 
-    if ((req.method === 'PUT' || req.method === 'PATCH') && req.url.startsWith('/artists')) {
-
+    if ((req.method === 'PUT' || req.method === 'PATCH') && req.url.startsWith('/artists') && splitUrl.length === 3) {
+      const artistId = splitUrl[2];
+      const newName = req.body.name;
+      let artist = artists[artistId];
+      if (artist && newName) {
+        artist.name = newName;
+        artist.updatedAt = new Date().toJSON();
+  
+        return res.end(JSON.stringify(artist))
+      }
     }
 
     res.statusCode = 404;
