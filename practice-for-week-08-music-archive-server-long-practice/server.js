@@ -159,12 +159,23 @@ const server = http.createServer((req, res) => {
       const artist = artists[artistId];
       const name = req.body.name;
       if (artist && name) {
+        res.statusCode = 201;
+
         const album = {}
         album.albumId = getNewAlbumId();
         album.name = name;
         album.artistId = artistId;
         albums[album.albumId] = album;
 
+        return res.end(JSON.stringify(album))
+      }
+    }
+
+    //edit a specified album by albumID
+    if (req.method === 'PATCH' || req.method === 'PUT' && splitUrl.length === 3 && splitUrl[1] === 'albums') {
+      const album = albums[splitUrl[2]]
+      if (album && req.body.name) {
+        album.name = req.body.name;
         return res.end(JSON.stringify(album))
       }
     }
