@@ -100,91 +100,121 @@ Test this in Postman or by using `fetch` in the browser.
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /artists/artistId:
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
-- Body:
+- Status code: 200
+- Headers: Content-type: application/json; charset=utf-8
+- Body: artist information in json format
 
 ### Add an artist
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: POST
+- URL: /artists
+- Headers: Content-type: application/json
+- Body: {"name": "artist name"}
 
 Response components:
 
-- Status code:
-- Headers:
-- Body:
+- Status code: 201
+- Headers: Content-type: application/json
+- Body: {
+    "name": "artist name",
+    "artistId": newId
+}
 
 ### Edit a specified artist by artistId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: PUT or PATCH
+- URL: /artists/artistId:
+- Headers: Content-type: application/json
+- Body: {"name": "new artist name"}
 
 Response components:
 
-- Status code:
-- Headers:
-- Body:
+- Status code: 200
+- Headers: Content-type: application/json
+- Body: {"name": "new artist name", "artistId": "artistId:", "updatedAt": "date"}
 
 ### Delete a specified artist by artistId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: DELETE
+- URL: /artists/artistId:
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
-- Body:
+- Status code: 200
+- Headers: Content-type: application/json
+- Body: {"message": "Sucessfully deleted"}
 
 ### Get all albums of a specific artist based on artistId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /artists/artistId:/albums
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+[
+    {
+        "name": "album name",
+        "albumId": "albumId",
+        "artistId": "artistId"
+    }
+]
 
 ### Get a specific album's details based on albumId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /albums/albumId:
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "album name",
+    "albumId": "albumId",
+    "artistId": "artistId",
+    "artist": {
+        "name": "artistName",
+        "artistId": "artistId"
+    },
+    "songs": [
+        {
+            "name": "songName",
+            "lyrics": "songLyrics",
+            "trackNumber": "songTrackNumber",
+            "songId": "songId",
+            "createdAt": "date",
+            "updatedAt": "date",
+            "albumId": "albumId"
+        }
+    ]
+}
 
 ### Add an album to a specific artist based on artistId
 
