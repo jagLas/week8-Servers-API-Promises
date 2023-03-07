@@ -153,6 +153,22 @@ const server = http.createServer((req, res) => {
       }
     }
 
+    //Add an album to a specific artist based on artistId
+    if (req.method === 'POST' && splitUrl.length === 4 && splitUrl[1] === 'artists' && splitUrl[3] === 'albums') {
+      const artistId = splitUrl[2];
+      const artist = artists[artistId];
+      const name = req.body.name;
+      if (artist && name) {
+        const album = {}
+        album.albumId = getNewAlbumId();
+        album.name = name;
+        album.artistId = artistId;
+        albums[album.albumId] = album;
+
+        return res.end(JSON.stringify(album))
+      }
+    }
+
     //endpoint not found
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
