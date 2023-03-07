@@ -95,169 +95,279 @@
   "6": {
     "endpoint": "Get all albums of a specific artist based on artistId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/artists/:artistId/albums",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body":
+      [
+        {
+            "name": "album name",
+            "albumId": "albumId",
+            "artistId": "artistId"
+        }
+      ]
     }
   },
   "7": {
     "endpoint": "Get a specific album's details based on albumId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/albums/:albumId",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body":
+      {
+        "name": "album name",
+        "albumId": "albumId",
+        "artistId": "artistId",
+        "artist": {
+            "name": "artistName",
+            "artistId": "artistId"
+        },
+        "songs": [
+            {
+                "name": "songName",
+                "lyrics": "songLyrics",
+                "trackNumber": "songTrackNumber",
+                "songId": "songId",
+                "createdAt": "date",
+                "updatedAt": "date",
+                "albumId": "albumId"
+            }
+        ]
+      }
     }
   },
   "8": {
     "endpoint": "Add an album to a specific artist based on artistId",
     "request": {
-      "method": "",
-      "URL": "",
-      "headers": null,
-      "body": null
+      "method": "POST",
+      "URL": "/artists/:artistId/albums",
+      "headers": {"Content-type": "application/json"},
+      "body":
+      {
+        "name": "new Album"
+      }
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 201,
+      "body": 
+      {
+        "name": "new Album",
+        "albumId": "albumId",
+        "artistId": "artistId"
+      }
     }
   },
   "9": {
     "endpoint": "Edit a specified album by albumId",
     "request": {
-      "method": "",
-      "URL": "",
-      "headers": null,
-      "body": null
+      "method": "PUT or PATCH",
+      "URL": "/albums/:albumId",
+      "headers": {"Content-type": "application/json"},
+      "body": 
+      {
+        "name": "new name"
+      }
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body":
+      {
+        "name": "new name",
+        "albumId": 2,
+        "artistId": 1
+      }
     }
   },
   "10": {
     "endpoint": "Delete a specified album by albumId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "DELETE",
+      "URL": "/artists/:albumId",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      {
+        "message": "Sucessfully deleted"
+      }
     }
   },
   "11": {
     "endpoint": "Get all songs of a specific artist based on artistId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/artists/:artistId/songs",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      [
+        {
+            "name": "song Name",
+            "lyrics": "song lyrics",
+            "trackNumber": "trackNumber",
+            "songId": "songId",
+            "albumId": "albumId"
+        }
+      ]
     }
   },
   "12": {
     "endpoint": "Get all songs of a specific album based on albumId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/albums/:albumId/songs",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      [
+        {
+            "name": "song Name",
+            "lyrics": "song lyrics",
+            "trackNumber": "trackNumber",
+            "songId": "songId",
+            "albumId": "albumId"
+        }
+      ]
     }
   },
   "13": {
     "endpoint": "Get all songs of a specified trackNumber",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/trackNumbers/:trackNumber/songs",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      [
+        {
+            "name": "song Name",
+            "lyrics": "song lyrics",
+            "trackNumber": "trackNumber",
+            "songId": "songId",
+            "albumId": "albumId"
+        }
+      ]
     }
   },
   "14": {
     "endpoint": "Get a specific song's details based on songId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "GET",
+      "URL": "/songs/:songId",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      [
+        {
+            "name": "song Name",
+            "lyrics": "song lyrics",
+            "trackNumber": "trackNumber",
+            "songId": "songId",
+            "albumId": "albumId"
+        }
+      ]
     }
   },
   "15": {
     "endpoint": "Add a song to a specific album based on albumId",
     "request": {
-      "method": "",
-      "URL": "",
-      "headers": null,
-      "body": null
+      "method": "POST",
+      "URL": "/albums/:albumId/songs",
+      "headers": {"Content-type": "application/json"},
+      "body": 
+      {
+        "name": "trackName 2",
+        "lyrics": "lyrics 2",
+        "trackNumber": 2
+      }
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 201,
+      "body": 
+      {
+        "name": "trackName 2",
+        "lyrics": "lyrics 2",
+        "trackNumber": 2,
+        "songId": 3,
+        "albumId": 1
+      }
     }
   },
   "16": {
     "endpoint": "Edit a specified song by songId",
     "request": {
-      "method": "",
-      "URL": "",
-      "headers": null,
-      "body": null
+      "method": "PUT or PATCH",
+      "URL": "/songs/:songId",
+      "headers": {"Content-type": "application/json"},
+      "body": 
+      {
+        "name": "new name",
+        "lyrics": "new lyrics",
+        "trackNumber": 2
+      }
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      {
+        "name": "new name",
+        "lyrics": "new lyrics",
+        "trackNumber": 2,
+        "songId": 2,
+        "albumId": 1,
+        "updatedAt": "2023-03-07T15:27:20.092Z"
+      }
     }
   },
   "17": {
     "endpoint": "Delete a specified song by songId",
     "request": {
-      "method": "",
-      "URL": "",
+      "method": "DELETE",
+      "URL": "/songs/:songId",
       "headers": null,
       "body": null
     },
     "response": {
       "headers": {"Content-type": "application/json"},
-      "statusCode": null,
-      "body": null
+      "statusCode": 200,
+      "body": 
+      {
+        "message": "Sucessfully deleted"
+      }
     }
   }
 }
