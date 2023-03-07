@@ -138,6 +138,21 @@ const server = http.createServer((req, res) => {
       return res.end(JSON.stringify(bandAlbums))
     }
 
+    //Get a specific album's details based on albumId
+    if (req.method === 'GET' && req.url.startsWith('/albums') && splitUrl.length === 3) {
+      const albumId = splitUrl[2];
+      const album = albums[albumId]
+      if (album){
+        const albumDetails = {};
+        for (const key in album) {
+          albumDetails[key] = album[key];
+        }
+        albumDetails.artist = artists[album.artistId];
+        albumDetails.songs = getSongsByAlbum(albumId);
+        return res.end(JSON.stringify(albumDetails));
+      }
+    }
+
     //endpoint not found
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
@@ -155,6 +170,18 @@ function getAlbumsByArtist(artistId) {
   }
 
   return bandAlbums
+}
+
+function getSongsByAlbum(albumId) {
+  const albumSongs = [];
+  for (const song in songs) {
+    // console.log(song)
+    if (songs[song].albumId == albumId) {
+      albumSongs.push(songs[song]);
+    }
+  }
+
+  return albumSongs;
 }
 
 const port = 5000;
