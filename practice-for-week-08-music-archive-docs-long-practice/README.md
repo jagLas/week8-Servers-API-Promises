@@ -220,76 +220,113 @@ Response components:
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
+- Method: POST
+- URL: /artists/artistId:/albums
+- Headers: Content-type: application/json
 - Body:
+{
+  "name": "new Album"
+}
 
 Response components:
 
-- Status code:
-- Headers:
-- Body:
+- Status code: 201
+- Headers: Content-type: application/json
+- Body: 
+{
+    "name": "new Album",
+    "albumId": "albumId",
+    "artistId": "artistId"
+}
 
 ### Edit a specified album by albumId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
+- Method: PUT or PATCH
+- URL: /albums/albumId:
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "new name"
+}
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers:Content-type: application/json
 - Body:
+{
+    "name": "new name",
+    "albumId": 2,
+    "artistId": 1
+}
 
 ### Delete a specified album by albumId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: DELETE
+- URL: /artists/albumId:
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+{
+    "message": "Sucessfully deleted"
+}
 
 ### Get all songs of a specific artist based on artistId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET 
+- URL: /artists/artistId:/songs
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+[
+    {
+        "name": "song Name",
+        "lyrics": "song lyrics",
+        "trackNumber": "trackNumber",
+        "songId": "songId",
+        "albumId": "albumId"
+    }
+]
 
 ### Get all songs of a specific album based on albumId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /albums/albumId:/songs
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+[
+    {
+        "name": "song Name",
+        "lyrics": "song lyrics",
+        "trackNumber": "trackNumber",
+        "songId": "songId",
+        "albumId": "albumId"
+    }
+]
 
 ### Get all songs of a specified trackNumber
 
@@ -307,76 +344,122 @@ constrained by for this endpoint?
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /trackNumbers/:trackNumber/songs
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+[
+    {
+        "name": "song Name",
+        "lyrics": "song lyrics",
+        "trackNumber": "trackNumber",
+        "songId": "songId",
+        "albumId": "albumId"
+    }
+]
 
 ### Get a specific song's details based on songId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: GET
+- URL: /songs/:songId
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+[
+    {
+        "name": "song Name",
+        "lyrics": "song lyrics",
+        "trackNumber": "trackNumber",
+        "songId": "songId",
+        "albumId": "albumId"
+    }
+]
 
 ### Add a song to a specific album based on albumId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
+- Method: POST
+- URL: /albums/:albumId/songs
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "trackName 2",
+    "lyrics": "lyrics 2",
+    "trackNumber": 2
+}
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 201
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "trackName 2",
+    "lyrics": "lyrics 2",
+    "trackNumber": 2,
+    "songId": 3,
+    "albumId": 1
+}
 
 ### Edit a specified song by songId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
+- Method: PUT or PATCH  
+- URL: /songs/:songId
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "new name",
+    "lyrics": "new lyrics",
+    "trackNumber": 2
+}
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+{
+    "name": "new name",
+    "lyrics": "new lyrics",
+    "trackNumber": 2,
+    "songId": 2,
+    "albumId": 1,
+    "updatedAt": "2023-03-07T15:27:20.092Z"
+}
 
 ### Delete a specified song by songId
 
 Request components:
 
-- Method:
-- URL:
-- Headers:
-- Body:
+- Method: DELETE
+- URL: /songs/:songId
+- Headers: none
+- Body: none
 
 Response components:
 
-- Status code:
-- Headers:
+- Status code: 200
+- Headers: Content-type: application/json
 - Body:
+{
+    "message": "Sucessfully deleted"
+}
 
 [http://localhost:5000]: http://localhost:5000
 [starter]: https://github.com/appacademy/practice-for-week-08-music-archive-docs-long-practice
