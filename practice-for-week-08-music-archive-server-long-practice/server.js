@@ -80,7 +80,7 @@ const server = http.createServer((req, res) => {
       return res.end(JSON.stringify(albums));
     }
 
-    if (req.method === 'GET' && splitUrl.length === 3) {
+    if (req.method === 'GET' && splitUrl.length === 3 && req.url.startsWith('/artists')) {
       let artistId = splitUrl[2];
       let artist = artists[artistId];
       if (artist) {
@@ -112,6 +112,10 @@ const server = http.createServer((req, res) => {
         };
         return res.end(JSON.stringify(artists[artistId]))
       }
+    }
+
+    if ((req.method === 'PUT' || req.method === 'PATCH') && req.url.startsWith('/artists')) {
+
     }
 
     res.statusCode = 404;
