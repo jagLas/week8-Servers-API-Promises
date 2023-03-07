@@ -126,6 +126,14 @@ const server = http.createServer((req, res) => {
       }
     }
 
+    if (req.method === 'DELETE' && req.url.startsWith('/artists') && splitUrl.length === 3) {
+      const artistId = splitUrl[2];
+      if (artists[artistId]) {
+        delete artists[artistId];
+        return res.end(`{"Record successfully deleted"}`)
+      }
+    }
+
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
     res.write(`{"Endpoint not found"}`);
