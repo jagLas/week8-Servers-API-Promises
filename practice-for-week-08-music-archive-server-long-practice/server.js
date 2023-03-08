@@ -189,6 +189,20 @@ const server = http.createServer((req, res) => {
       }
     }
 
+    // Get all songs of a specific artist based on artistId
+
+    // Get all songs of a specific album based on albumId
+
+    // Get all songs of a specified trackNumber
+
+    // Get a specific song's details based on songId
+
+    // Add a song to a specific album based on albumId
+
+    // Edit a specified song by songId
+
+    // Delete a specified song by songId
+
     //endpoint not found
     res.statusCode = 404;
     res.setHeader('Content-Type', 'application/json');
