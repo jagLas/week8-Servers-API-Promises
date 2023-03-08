@@ -233,6 +233,26 @@ const server = http.createServer((req, res) => {
     }
 
     // Add a song to a specific album based on albumId
+    if (req.method === 'POST' && splitUrl.length === 4 && splitUrl[1] === 'albums' && splitUrl[3] === 'songs') {
+      const albumId = splitUrl[2];
+      const album = albums[albumId];
+      const {name, lyrics, trackNumber} = req.body
+
+      if(album && name && lyrics && trackNumber) {
+        const songId = getNewSongId();
+        const songDetails = {
+          songId: songId,
+          name: name,
+          trackNumber: trackNumber,
+          albumId: albumId,
+          lyrics: lyrics
+        }
+        res.statusCode = 201;
+
+        songs[songId] = songDetails;
+        return res.end(JSON.stringify(songDetails))
+      }
+    }
 
     // Edit a specified song by songId
 
