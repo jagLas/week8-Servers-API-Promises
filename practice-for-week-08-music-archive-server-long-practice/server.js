@@ -200,12 +200,20 @@ const server = http.createServer((req, res) => {
           const albumSongs = getSongsByAlbum(album.albumId);
           songs.push(...albumSongs);
         })
-        
+
         return res.end(JSON.stringify(songs));
       }
     }
 
     // Get all songs of a specific album based on albumId
+    if (req.method === 'GET' && splitUrl.length === 4 && splitUrl[1] === 'albums' && splitUrl[3] === 'songs') {
+      const albumId = splitUrl[2];
+      const album = albums[albumId];
+      if (album) {
+        const songs = getSongsByAlbum(albumId);
+        return res.end(JSON.stringify(songs));
+      }
+    }
 
     // Get all songs of a specified trackNumber
 
