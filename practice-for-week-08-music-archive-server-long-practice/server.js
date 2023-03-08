@@ -216,6 +216,10 @@ const server = http.createServer((req, res) => {
     }
 
     // Get all songs of a specified trackNumber
+    if (req.method === 'GET' && splitUrl.length === 4 && splitUrl[1] === 'trackNumbers' && splitUrl[3] === 'songs') {
+      const trackNum = splitUrl[2];
+      return res.end(JSON.stringify(getSongsByTrackNumber(trackNum)))
+    }
 
     // Get a specific song's details based on songId
 
@@ -254,6 +258,18 @@ function getSongsByAlbum(albumId) {
   }
 
   return albumSongs;
+}
+
+function getSongsByTrackNumber(trackNumber) {
+  const trackSongs = [];
+  for (const song in songs) {
+    // console.log(song)
+    if (songs[song].trackNumber == trackNumber) {
+      trackSongs.push(songs[song]);
+    }
+  }
+
+  return trackSongs;
 }
 
 const port = 5000;
