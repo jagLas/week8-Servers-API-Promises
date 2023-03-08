@@ -222,6 +222,15 @@ const server = http.createServer((req, res) => {
     }
 
     // Get a specific song's details based on songId
+    if (req.method === 'GET' && req.url.startsWith('/songs') && splitUrl.length === 3) {
+      const songId = splitUrl[2];
+      const song = songs[songId];
+      if (song) {
+        const songDetails = [];
+        songDetails.push(song);
+        return res.end(JSON.stringify(songDetails))
+      }
+    }
 
     // Add a song to a specific album based on albumId
 
