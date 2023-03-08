@@ -255,6 +255,24 @@ const server = http.createServer((req, res) => {
     }
 
     // Edit a specified song by songId
+    if (req.method === 'PATCH' || req.method === 'PUT' && splitUrl.length === 3 && splitUrl[1] === 'songs') {
+      const song = songs[splitUrl[2]]
+      if (song && req.body) {
+        if (req.body.name) {
+          song.name = req.body.name;
+        }
+        if (req.body.lyrics) {
+          song.lyrics = req.body.lyrics;
+        }
+        if (req.body.trackNumber) {
+          song.trackNumber = req.body.trackNumber
+        }
+
+        song.updatedAt = new Date().toJSON();
+
+        return res.end(JSON.stringify(song))
+      }
+    }
 
     // Delete a specified song by songId
 
