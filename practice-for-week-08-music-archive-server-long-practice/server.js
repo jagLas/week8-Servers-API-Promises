@@ -181,6 +181,13 @@ const server = http.createServer((req, res) => {
     }
 
     //delete a specified album by albumId
+    if (req.method === 'DELETE' && req.url.startsWith('/albums') && splitUrl.length === 3) {
+      const albumId = splitUrl[2];
+      if (albums[albumId]) {
+        delete albums[albumId];
+        return res.end(`{"Record successfully deleted"}`)
+      }
+    }
 
     //endpoint not found
     res.statusCode = 404;
